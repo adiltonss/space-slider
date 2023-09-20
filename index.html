@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <title>Space Slide</title>
+    <style>
+        body{
+            background-color: #000;
+            display: grid;
+            place-items: center;
+            font-family: Helvetica, sans-serif;
+        }
+        #canvas{
+            max-width: 100%;
+            border: thin solid #000;
+        }
+        .end-game-board{
+            width: 250px;
+            height: 250px;
+            background-color: #00000074;
+            border-radius: 5px;
+            border: thin solid #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .end-game-board .score-display{
+            color: #fff;
+        }
+
+        .end-game-board .retry-btn{
+            font-size: 3em;
+            background-color: transparent;
+            border: none;
+            margin-top: .5em;
+        }
+        .end-game-board .retry-btn i{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="end-game-board">
+        <div class="score-display"></div>
+        <button class="retry-btn">
+            <i class="fi fi-br-rotate-right"></i>
+        </button>
+    </div>
+    <script src="./js/main.js"></script>
+</body>
+</html>
