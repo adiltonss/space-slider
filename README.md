@@ -1,5 +1,7 @@
 ############ space-slider #############
 
+[Veja o projeto aqui!](https://space-slider.vercel.app/)
+
 ![image](https://github.com/adiltonss/space-slider/assets/83099533/8448797c-5cba-4924-bf0d-132ce1fc25cf)
 
 O projeto é um game de navinha onde você deve desviar dos asteroides que surgem no caminho, evitando colisão.
