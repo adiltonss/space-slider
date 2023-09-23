@@ -1,5 +1,10 @@
 //song by David Fesliyan
 
+document.querySelector(".start-game").addEventListener("click", ()=>{
+    document.querySelector(".start-game").style.display = 'none';
+    startGame(0)
+})
+
 let gameOn = true
 let score = 0
 const canvas = document.getElementById("canvas");
@@ -11,22 +16,43 @@ canvas.height = 500;
 const IMPACTSONG = new Audio("./songs/impact.wav")
 const GAMEMUSIC = new Audio("./songs/music.mp3")
 let df = 0;
-GAMEMUSIC.play()
+GAMEMUSIC.play();
 
 
     const commands = {
-    up: "arrowup",
-    left:"arrowleft",
-    right:"arrowright",
-    down: "arrowdown",
+    up: "ArrowUp",
+    left:"ArrowLeft",
+    right:"ArrowRight",
+    down: "ArrowDown",
     shoot: "s"
 }
 
 class Inputs{
     constructor(){
         this.keys = [];
+        
+        document.querySelectorAll(".btn").forEach(button => {
+            button.addEventListener("touchstart", (e)=>{
+                const key = e.target.className.split(' ')[1]
+                const eventKeyDown = new KeyboardEvent('keydown', {
+                    key: commands[key],
+                });
+                window.dispatchEvent(eventKeyDown)
+            })
+        })
+
+        document.querySelectorAll('.btn').forEach(button =>{
+            button.addEventListener("touchend", (e)=>{
+                const key = e.target.className.split(' ')[1]
+                const eventKeyUp = new KeyboardEvent('keyup', {
+                    key: commands[key],
+                }); 
+                window.dispatchEvent(eventKeyUp)
+            })
+        })
+
         window.addEventListener("keydown", (e) => {
-            const KEY = e.key.toLowerCase()
+            const KEY = e.key
             if((KEY === commands.left ||
                 KEY === commands.right ||
                 KEY === commands.up ||
@@ -36,10 +62,8 @@ class Inputs{
                 }
         });
     
-
-
         window.addEventListener("keyup", (e) => {
-            const KEY = e.key.toLowerCase()
+            const KEY = e.key
             const index = this.keys.indexOf(KEY);
             if (index !== -1) {
                 this.keys.splice(index, 1);
@@ -315,10 +339,6 @@ document.querySelector(".retry-btn").addEventListener("click", ()=>{
 })
 
 function displayScore(){
-    ctx.textAlign = 'left'
-    ctx.font = '15px Helvetica'
-    ctx.fillStyle = '#cccccca7'
-    ctx.fillText('Score: ' + score, 10, 20)
+    document.querySelector("#score").innerHTML = "Score: " + score
 }
 
-window.onload = startGame(0);

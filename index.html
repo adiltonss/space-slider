@@ -3,65 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <title>Space Slide</title>
-    <style>
-        body{
-            background-color: #000;
-            display: grid;
-            place-items: center;
-            font-family: Helvetica, sans-serif;
-        }
-        #canvas{
-            max-width: 100%;
-            border: thin solid #000;
-        }
-        .end-game-board{
-            width: 250px;
-            height: 250px;
-            background-color: #00000074;
-            border-radius: 5px;
-            border: thin solid #fff;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .end-game-board .score-display{
-            color: #fff;
-        }
-
-        .end-game-board .retry-btn{
-            font-size: 3em;
-            background-color: transparent;
-            border: none;
-            margin-top: .5em;
-        }
-        .end-game-board .retry-btn i{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ccc;
-        }
-
-
-
-
-    </style>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="score"></div>
+
+    <div class="start-game-div">
+        <button class="start-game">Start</button>
+    </div>
     <canvas id="canvas"></canvas>
     <div class="end-game-board">
         <div class="score-display"></div>
         <button class="retry-btn">
             <i class="fi fi-br-rotate-right"></i>
         </button>
+    </div>
+
+    <div class="mobile-controls">
+        <div class="btn-cont left">
+            <button class="btn up"><i class="fi fi-sr-arrow-circle-up"></i></button>
+            <button class="btn down"><i class="fi fi-sr-arrow-circle-down"></i></button>
+            <button class="btn left"><i class="fi fi-sr-arrow-circle-left"></i></button>
+            <button class="btn right"><i class="fi fi-sr-arrow-circle-right"></i></button>
+        </div>
+        <div class="btn-cont right">
+            <button class="btn up"><i class="fi fi-sr-arrow-circle-up"></i></button>
+            <button class="btn down"><i class="fi fi-sr-arrow-circle-down"></i></button>
+            <button class="btn left"><i class="fi fi-sr-arrow-circle-left"></i></button>
+            <button class="btn right"><i class="fi fi-sr-arrow-circle-right"></i></button>
+        </div>
     </div>
     <script src="./js/main.js"></script>
 </body>

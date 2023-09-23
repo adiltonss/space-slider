@@ -1,0 +1,167 @@
+@font-face {
+    font-family: "Neon";
+    src: url('./fonts/Neon.ttf');
+}
+
+*{
+    font-family: "Neon";
+}
+
+body{
+    background-color: #000;
+    display: grid;
+    place-items: center;
+}
+
+.start-game-div{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+#score{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #ffffff8f;
+}
+
+.start-game{
+    background-color: #ccc;
+    border: none;
+    border-radius: 10px;
+    width: 150px;
+    font-size: 30px;
+    padding: 10px;
+}
+
+#canvas{
+    max-width: 100%;
+    max-height: 90vh;
+    border: thin solid #000;
+}
+.end-game-board{
+    width: 250px;
+    height: 250px;
+    background-color: #00000074;
+    border-radius: 5px;
+    border: thin solid #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-controls{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn-cont{
+    width: 120px;
+    height: 120px;
+    position: relative;
+}
+
+.btn-cont .btn{
+    border: none;
+    background-color: transparent;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    position: absolute;
+    color: #ccc;
+}
+
+.btn:active{
+    color: #8d8d8d;
+}
+
+.btn-cont .up, .btn-cont .down{
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btn-cont .left, .btn-cont .right{
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.up{
+    top: 0;
+}
+
+.down{
+    bottom: 0;
+}
+
+.left{
+    left: 0;
+}
+
+.right{
+    right: 0;
+}
+
+.btn-cont .btn i{
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.end-game-board{
+    z-index: 1000;
+}
+
+.end-game-board .score-display{
+    color: #fff;
+}
+
+.end-game-board .retry-btn{
+    font-size: 3em;
+    background-color: transparent;
+    border: none;
+    margin-top: .5em;
+}
+.end-game-board .retry-btn i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+}
+
+@media (max-width: 900px) and (max-height: 500px) {
+    .mobile-controls{
+        width: 90%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@media screen and (min-width: 600px) and (min-height: 501px){
+    .mobile-controls{
+        width: 500px;
+
+    }
+}
+
+@media screen and (min-width: 800px) and (min-height: 501px){
+    .mobile-controls{
+        display: none;
+    }
+}
