@@ -11,10 +11,10 @@ canvas.height = 500;
 const IMPACTSONG = new Audio("./songs/impact.wav")
 const GAMEMUSIC = new Audio("./songs/music.mp3")
 let df = 0;
-
 GAMEMUSIC.play()
 
-const commands = {
+
+    const commands = {
     up: "arrowup",
     left:"arrowleft",
     right:"arrowright",
@@ -72,11 +72,12 @@ class Player{
     draw(){
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
         //i might need this later
-        //ctx.strokeStyle = "#fff";
-        //head hitbox
-        //ctx.strokeRect(this.x + this.width / 6.8, this.y + this.height / 2, this.width / 2 + 20 , this.height / 7)
-        //wings hitbox
-        //ctx.strokeRect(this.x + this.width / 2.5, this.y + this.height / 4.5, this.width / 5 , this.height / 2)
+        // ctx.strokeStyle = "#fff";
+        // ctx.strokeRect(this.x + 10 , this.y, this.width - 20, this.height)
+        // //head hitbox
+        // ctx.strokeRect(this.x + this.width / 2.3, this.y + this.height / 4.5, this.width / 8 , this.height / 2)
+        // //wings hitbox
+        // ctx.strokeRect(player.x + player.width / 5, player.y + player.height / 2 + 1, player.width / 2 + 10 , player.height / 10)            
     }
 
     update(){
@@ -96,17 +97,17 @@ class Player{
         }
 
         //avoid fall over borders
-        if(this.x >= canvas.width - this.width){
-            this.x = canvas.width - this.width
+        if(this.x >= canvas.width - this.width + 15){
+            this.x = canvas.width - this.width + 15
         }
-        if(this.x <= 0){
-            this.x = 0
+        if(this.x <= -15){
+            this.x = -15
         }
-        if(this.y >= canvas.height - this.height){
-            this.y = canvas.height - this.height
+        if(this.y >= canvas.height - this.height + 25){
+            this.y = canvas.height - this.height + 25
         }
-        if(this.y <= 0){
-            this.y = 0
+        if(this.y <= -20){
+            this.y = -20
         }
     }
 }
@@ -120,9 +121,6 @@ class Background{
         this.speed = 2; 
         this.img = new Image()
         this.img.src = './images/bg.png'
-        this.fps = 20;
-        this.acc = 0;
-        this.interval = 1000/this.fps;
     }
 
     reset(){
@@ -179,7 +177,7 @@ class Asteroid{
         //i might need this later
         //hitbox
         // ctx.strokeStyle = "#fff";
-        // ctx.strokeRect(this.x + 5, this.y + 5, this.width - 10, this.height - 10)
+        // ctx.strokeRect(this.x + 7, this.y + 8, this.width - 15, this.height - 15)
     }
 
     update(){
@@ -230,11 +228,6 @@ function startGame(delta){
     }
 }
 
-if(score >= 10){
-    ASTEROIDSONSCREEN.forEach(item => item.speed+=1)
-    console.log(ASTEROIDSONSCREEN[0]);
-}
-
 
 function drawAsteroids(){
     ASTEROIDSONSCREEN.forEach((asteroid, currentIndex) =>{
@@ -244,7 +237,6 @@ function drawAsteroids(){
         for(let i = 0; i < ASTEROIDSONSCREEN.length; i++){
             if (i !== currentIndex) {
                 const otherAsteroid = ASTEROIDSONSCREEN[i];
-    
                 //avoid asteroids to have the same coordinates
                 avoidAsteroidsToColideEachOther(asteroid, otherAsteroid)
             }
@@ -260,18 +252,19 @@ function avoidAsteroidsToColideEachOther(asteroid, otherAsteroid){
 
 function checkCollisions() {
     ASTEROIDSONSCREEN.forEach(asteroid => {
-        // check asteroids collision against the head
+        // check asteroids collision against the wings
         if (
-            (player.x + player.width / 6.8 < asteroid.x + asteroid.width - 10 &&
-            player.x + player.width / 6.8 + player.width / 2 + 20 > asteroid.x + 5 &&
-            player.y + player.height / 2 < asteroid.y + asteroid.height - 10 &&
-            player.y + player.height / 2 + player.height / 7 > asteroid.y + 5) 
+            (player.x + player.width / 5 < asteroid.x + asteroid.width - 15 &&
+            player.x + player.width / 5 + player.width / 2 + 10 > asteroid.x + 7 &&
+            player.y + player.height / 2 < asteroid.y + asteroid.height - 15 &&
+            player.y + player.height / 2 + player.height / 10 > asteroid.y + 7) 
             || 
-            //check asteroids collision against the wings
-            (player.x + player.width / 2.5 < asteroid.x + asteroid.width - 10 &&
-            player.x + player.width / 2.5 + player.width / 5 > asteroid.x + 5 &&
-            player.y + player.height / 4.5 < asteroid.y + asteroid.height - 10 &&
-            player.y + player.height / 4.5 + player.height / 2 > asteroid.y + 5)
+            
+            //check asteroids collision against the head
+            (player.x + player.width / 2.3 < asteroid.x + asteroid.width - 15 &&
+            player.x + player.width / 2.3 + player.width / 8 > asteroid.x + 7 &&
+            player.y + player.height / 4.5 < asteroid.y + asteroid.height - 15 &&
+            player.y + player.height / 4.5 + player.height / 2 > asteroid.y + 8)
         ) {
             stopGame()
         }
@@ -295,6 +288,7 @@ function restart(){
     score = 0
     ASTEROIDSONSCREEN.length = 5
     ASTEROIDSONSCREEN.forEach(item => item.speed = 6)
+    background.speed = 2
     document.querySelector(".end-game-board").style.display = "none"
     gameOn = true
     background.reset()
@@ -306,12 +300,13 @@ function restart(){
 }
 
 
+//increase obstacles and their speed
 setInterval(()=>{
     if(gameOn){
         const ast = new Asteroid()
         ASTEROIDSONSCREEN.push(ast)
-        ASTEROIDSONSCREEN.forEach(item => item.speed += .1)
-        console.log("added");
+        ASTEROIDSONSCREEN.forEach(item => item.speed += .2)
+        background.speed += .2
     }
 }, 5000)
 
@@ -326,4 +321,4 @@ function displayScore(){
     ctx.fillText('Score: ' + score, 10, 20)
 }
 
-startGame(0);
+window.onload = startGame(0);
